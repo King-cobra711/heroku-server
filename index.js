@@ -52,7 +52,6 @@ app.use(
       "http://localhost:3000",
       "https://beer-buddies-game.herokuapp.com",
     ],
-    methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Origin", "Content-Type", "Authorization"],
   })
