@@ -120,7 +120,10 @@ app.post(
     } else {
       db.registerUser(req, res, (cb) => {
         if (cb === 400) {
+          console.log("failed to hash password");
           res.status(400).send({ LoggedIn: false });
+        } else if (cb === 401) {
+          console.log("failed to register user");
         } else {
           req.session.user = cb[0];
           console.log(req.session.user);
