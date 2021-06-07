@@ -66,6 +66,7 @@ const registerUser = (req, res, cb) => {
     }
     db.query(RegisterUser, [Email, Username, hash], (err, result) => {
       if (err) {
+        console.log(err);
         cb(401);
       }
       if (result) {

@@ -127,7 +127,6 @@ app.post(
         } else {
           req.session.user = cb[0];
           console.log(req.session.user);
-          console.log("above");
           res.status(200).send({ LoggedIn: true });
         }
       });
