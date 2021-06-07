@@ -35,16 +35,16 @@ const logger = createLogger({
   ],
 });
 
-const limiter = rateLimit({
-  windowMs: 1000, // 1 second
-  max: 100, // limit each IP to 10 requests per windowMs
-  message: "Too many requests",
-});
-const accountLimiter = rateLimit({
-  windowMs: 24 * 60 * 1000, // 24hours
-  max: 1000, // limit each IP to 1000 requests per windowMs
-  message: "Too many requests",
-});
+// const limiter = rateLimit({
+//   windowMs: 1000, // 1 second
+//   max: 100, // limit each IP to 10 requests per windowMs
+//   message: "Too many requests",
+// });
+// const accountLimiter = rateLimit({
+//   windowMs: 24 * 60 * 1000, // 24hours
+//   max: 1000, // limit each IP to 1000 requests per windowMs
+//   message: "Too many requests",
+// });
 
 app.use(
   Cors({
@@ -77,7 +77,7 @@ app.use(
   })
 );
 
-app.use(limiter);
+// app.use(limiter);
 
 app.post(
   "/checkRegisterDetails",
@@ -112,7 +112,7 @@ app.post(
   body("Email").isEmail(),
   body("Username").isLength({ min: 3, max: 15 }),
   body("Password").isLength({ min: 6, max: 20 }),
-  accountLimiter,
+  // accountLimiter,
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -183,13 +183,17 @@ app.post(
   }
 );
 
-app.get("/login", accountLimiter, (req, res) => {
-  if (req.session.user) {
-    res.status(200).send({ loggedIn: true, User: req.session.user });
-  } else {
-    res.status(200).send({ loggedIn: false });
+app.get(
+  "/login",
+  // accountLimiter,
+  (req, res) => {
+    if (req.session.user) {
+      res.status(200).send({ loggedIn: true, User: req.session.user });
+    } else {
+      res.status(200).send({ loggedIn: false });
+    }
   }
-});
+);
 app.get("/user", (req, res) => {
   if (req.session.user) {
     res.status(200).send({ loggedIn: true, User: req.session.user });
