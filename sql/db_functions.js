@@ -62,7 +62,7 @@ const registerUser = (req, res, cb) => {
   bcrypt.hash(Password, saltRounds, (err, hash) => {
     if (err) {
       console.log(err);
-      cb(400);
+      cb(401);
     }
     db.query(RegisterUser, [Email, Username, hash], (err, result) => {
       if (err) {
