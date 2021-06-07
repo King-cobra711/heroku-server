@@ -6,10 +6,20 @@ const Cors = require("cors");
 const app = express();
 const db = require("./sql/db_functions");
 const { body, validationResult } = require("express-validator");
-require("dotenv").config({ path: "/Users/Matt/Desktop/Beer Buddies/.env" });
+require("dotenv").config();
 const rateLimit = require("express-rate-limit");
+const MySQLStore = require("express-mysql-session")(session);
 
 const { transports, createLogger, format } = require("winston");
+
+const sessionStore = new MySQLStore({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DATABASE,
+  port: process.env.DB_DOCK,
+  multipleStatements: true,
+});
 
 const logger = createLogger({
   format: format.combine(format.timestamp(), format.json()),
@@ -59,7 +69,7 @@ app.use(
     resave: false,
     proxy: true,
     cookie: {
-      maxAge: null,
+      maxAge: 60000 * 60 * 48,
       secure: process.env.NODE_ENV === "production",
       httpOnly: false,
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",

@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "./.env" });
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const mysql = require("mysql");
