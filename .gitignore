@@ -1,2 +1,5 @@
 node_modules
 .env
+testing
+action.log
+error.log
