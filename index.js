@@ -110,8 +110,8 @@ app.post(
 app.post(
   "/register",
   body("Email").isEmail(),
-  body("Username").isLength({ min: 3, max: 15 }),
-  body("Password").isLength({ min: 6, max: 20 }),
+  body("Username").isLength({ min: 3, max: 15 }).isAlphanumeric(),
+  body("Password").isLength({ min: 6, max: 20 }).isAlphanumeric(),
   // accountLimiter,
   (req, res) => {
     const errors = validationResult(req);
