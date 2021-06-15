@@ -705,5 +705,19 @@ app.post("/AdminUpdateUser", (req, res) => {
 app.get("/test", (req, res) => {
   res.status(200).send({ message: "testy boy" });
 });
+app.get("/Whitelist", (req, res) => {
+  let whitelist = ["::1", "::ffff:127.0.0.1", process.env.IPADMIN];
+  let address = req.ip;
+  let check = whitelist.includes(address);
+  if (req.session.user.UserType_ID === 1) {
+    if (check === true) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(400);
+    }
+  } else {
+    res.sendStatus(400);
+  }
+});
 
 module.exports = app;
