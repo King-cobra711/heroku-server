@@ -7,7 +7,7 @@ The project is the creation of the ‘Beer Buddies’ game. The game is essentia
 ## Technologies
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [MAMP](https://www.mamp.info/en/downloads/)
+- [MAMP](https://www.mamp.info/en/downloads/) or [MySQL](https://www.mysql.com/)
 - [NodeJS (includes npm)](https://nodejs.org/en/)
 
 ## .ENV file setup for assessment purposes
@@ -74,3 +74,12 @@ Password: Admin711
 
 Username: testuser,
 Password: aaaaaa
+
+### Moving forward, the following functionality needs to be added:
+
+- the ‘friends list’ needs to be added, with instant messaging
+- blacklist functionality needs to be implemented
+- Light and dark mode
+- improve app performance
+- update sidebar for leaderboards
+- improve validation error messaging

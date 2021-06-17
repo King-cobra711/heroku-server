@@ -11,6 +11,8 @@ const db = mysql.createPool({
   multipleStatements: true,
 });
 
+// Database oject installed above. This seperates the sql from other code to make it cleaner and easier to read. Functions that interact with the database are written here and then exported to be used in the index.js file in the server folder.
+
 // POST
 
 const checkRegistrationDetails = (req, status) => {
@@ -399,6 +401,7 @@ const AdminUserSearch = (req, cb) => {
 };
 const SearchUser = (req, cb) => {
   const Name = req.body.name;
+  console.log(Name);
   const user = "SELECT User_Name FROM User WHERE User_Name = ?";
   db.query(user, [Name], (err, result) => {
     console.log(result);

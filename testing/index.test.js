@@ -110,6 +110,49 @@ describe("Successful retrieval of all user's scores", () => {
     done();
   });
 });
+describe("Successful retrieval login status", () => {
+  test("Should respond with a 200 status code", async (done) => {
+    const res = await request.get("/login").set("Cookie", cookie);
+    expect(res.status).toBe(200);
+    done();
+  });
+});
+describe("Successful update of user's picture", () => {
+  test("Should respond with a 200 status code", async (done) => {
+    const res = await request.post("/UpdatePic").set("Cookie", cookie).send({
+      id: 43,
+      Pic: "Coors",
+    });
+    expect(res.status).toBe(200);
+    done();
+  });
+});
+describe("Successful update of user's biograpgy", () => {
+  test("Should respond with a 200 status code", async (done) => {
+    const res = await request
+      .post("/UpdateBiography")
+      .set("Cookie", cookie)
+      .send({
+        id: 43,
+        Pic: "updated biography",
+      });
+    expect(res.status).toBe(200);
+    done();
+  });
+});
+describe("Successful update of user's theme", () => {
+  test("Should respond with a 200 status code", async (done) => {
+    const res = await request.post("/UpdateTheme").set("Cookie", cookie).send({
+      id: 43,
+      theme: "green",
+    });
+    expect(res.status).toBe(200);
+    done();
+  });
+});
+
+// Admin
+
 describe("Successful retrieval of all user's for admin manipulation", () => {
   test("Should respond with a 200 status code", async (done) => {
     const res = await request.get("/AdminUserSearch").set("Cookie", cookie);
